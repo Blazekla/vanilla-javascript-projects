@@ -3,7 +3,7 @@ const loading = document.querySelector(".loader");
 const filter = document.getElementById("filter");
 
 let page = 1;
-let limit = 3;
+let limit = 10;
 
 async function getPosts() {
   const res = await fetch(
@@ -43,6 +43,30 @@ function showLoading() {
   }, 1000);
 }
 
+//Show Filtered Post Function
+function showFilteredPost(e) {
+  const searchValue = e.target.value.toUpperCase();
+
+  //   const postTitle=;
+  //   const postBody=;
+
+  const allPosts = document.querySelectorAll(".post");
+
+  allPosts.forEach(post => {
+    const postTitle = post.querySelector(".post-title").innerText.toUpperCase();
+    // const postTitle = post.getElementsByClassName("post-title")[0].innerText;
+    const postBody = post.querySelector(".post-body").innerText.toUpperCase();
+
+    if (
+      postTitle.indexOf(searchValue) >= 0 ||
+      postBody.indexOf(searchValue) >= 0
+    ) {
+      post.style.display = "flex";
+    } else {
+      post.style.display = "none";
+    }
+  });
+}
 window.addEventListener("scroll", () => {
   //Useful HTML properties below
   //   console.log(document.documentElement.scrollTop);
@@ -53,4 +77,9 @@ window.addEventListener("scroll", () => {
   if (scrollTop + clientHeight >= scrollHeight - 5) {
     showLoading();
   }
+});
+
+//Filter event listener
+filter.addEventListener("input", e => {
+  showFilteredPost(e);
 });
