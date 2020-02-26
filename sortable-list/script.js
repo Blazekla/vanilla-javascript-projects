@@ -21,16 +21,33 @@ let dragStartIndex;
 
 createList();
 
+//comparison
+// const numbers = [1, 3, 110, 40, 302];
+// console.log(
+//   "sorting numbers: " +
+//     numbers.sort(
+//       (a, b) => {
+//         console.log("result function: " + (a - b));
+//         return a - b;
+//       }
+//       //   function(a, b) {
+//       //   console.log("result function: " + (a - b));
+//       //   return a - b;
+//       // }
+//     )
+// );
+
 //Insert list items into DOM
 
 function createList() {
   [...richestPeople]
     .map(a => ({ value: a, sort: Math.random() }))
+    .sort((a, b) => a.sort - b.sort)
+    .map(a => a.value)
     .forEach((person, index) => {
-      console.log(person);
+      // console.log(person);
       const listItem = document.createElement("li");
       listItem.setAttribute("data-index", index);
-
       listItem.innerHTML = `
         <span class="number">${index + 1}</span>
         <div class="draggable" draggable="true">
