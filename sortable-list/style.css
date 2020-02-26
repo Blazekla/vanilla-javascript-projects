@@ -85,5 +85,5 @@ body {
 }
 
 .check-btn:focus {
-  /* outline: none; */
+  outline: none;
 }
